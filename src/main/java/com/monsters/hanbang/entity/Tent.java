@@ -1,4 +1,4 @@
-package com.monsters.hanbang.Entity;
+package com.monsters.hanbang.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
