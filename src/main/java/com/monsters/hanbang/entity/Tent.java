@@ -1,6 +1,9 @@
 package com.monsters.hanbang.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.*;
 
 @Getter
@@ -10,7 +13,8 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 public class Tent {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name; // 그늘막 구역 이름
