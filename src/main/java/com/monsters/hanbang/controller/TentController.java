@@ -3,7 +3,6 @@ package com.monsters.hanbang.controller;
 import com.monsters.hanbang.dto.TentDto;
 import com.monsters.hanbang.service.TentService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
