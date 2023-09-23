@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import logo from './images/logo.png';
 import arrow from './images/arrow.png';
 
+const {kakao} = window;
 
 function App() {
     const [tentData, setTentData] = useState([]);
@@ -27,6 +28,13 @@ function App() {
 
     useEffect(() => {
         getTents();
+
+        const container = document.getElementById('map');
+        const options = {
+            center : new kakao.maps.LatLng(33.450701, 126.570667),
+            level : 3
+        };
+        const map = new kakao.maps.Map(container, options);
     }, []);
 
     useEffect(() => {
@@ -39,7 +47,7 @@ function App() {
 
 
     return (
-        <div style={{display: 'flex', backgroundColor: '#F2F4F8', height: '100vh'}}>
+        <div style={{display: 'flex', height: '100vh'}}>
             {/* 사이드바 */}
             <div className="scrollbar-none" style={{
                 background: 'white',
@@ -48,7 +56,8 @@ function App() {
                 borderTopRightRadius: '30px',
                 borderBottomRightRadius: '30px',
                 boxShadow: '3px 0px 20px gray',
-                overflow: 'auto'
+                overflow: 'auto',
+                zIndex: '99'
             }}>
                 {/* 로고 */}
                 <div style={{
@@ -200,7 +209,10 @@ function App() {
                         )}
                     </div>
                 ))}
+            </div>
 
+            {/* 지도 */}
+            <div id="map" style={{width: '75vw', height: '100%', position: "absolute", left: "25vw"}}>
             </div>
         </div>
     );
