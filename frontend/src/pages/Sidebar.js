@@ -89,17 +89,24 @@ const Sidebar = () => {
                                     padding: '2px 10px',
                                     borderRadius: '20px',
                                     background:
-                                        tent.status === '포화'
-                                            ? '#E77871'
-                                            : tent.status === '혼잡'
-                                                ? '#ECDE62'
-                                                : tent.status === '여유'
-                                                    ? '#98DC87'
-                                                    : '#E9E9E9',
+                                        tent.status === '미운영'
+                                            ? '#E9E9E9'
+                                            : (tent.currentTents / tent.recommendedTents) >= 0.8
+                                                ? '#E77871' // 포화
+                                                : (tent.currentTents / tent.recommendedTents) >= 0.5
+                                                    ? '#ECDE62' // 혼잡
+                                                    : '#98DC87', // 여유
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center'
-                                }}>{tent.status}</div>
+                                }}>{tent.status === '미운영'
+                                    ? tent.status
+                                    : (tent.currentTents / tent.recommendedTents) >= 0.8
+                                        ? '포화'
+                                        : (tent.currentTents / tent.recommendedTents) >= 0.5
+                                            ? '혼잡'
+                                            : '여유'}</div>
+                                {/*}}>{tent.status}</div>*/}
                             </div>
                             <div>
                                 <img src={arrow}
@@ -125,10 +132,15 @@ const Sidebar = () => {
                         {/* 상세 설명 확장 */}
                         {expandedTents[tent.id] && (
                             <div>
-                                <div style={{display: 'flex', marginBottom: '7px'}}>
-                                    <div style={{width: '20%', fontWeight: 'bold'}}>상태</div>
-                                    <div style={{width: '80%'}}>이용중: 100 / 권장 텐트 개수: 125</div>
-                                </div>
+                                {tent.status === '운영' && (
+                                    <div style={{display: 'flex', marginBottom: '7px'}}>
+                                        <div style={{width: '20%', fontWeight: 'bold'}}>상태</div>
+                                        <div style={{width: '80%'}}>{tent.currentTents} / {tent.recommendedTents} (이용 텐트
+                                            /
+                                            권장 텐트)
+                                        </div>
+                                    </div>
+                                )}
                                 <div style={{display: 'flex', marginBottom: '7px'}}>
                                     <div style={{width: '20%', fontWeight: 'bold'}}>공원</div>
                                     <div style={{width: '80%'}}>{tent.park}</div>
