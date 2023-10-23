@@ -1,6 +1,9 @@
-package com.monsters.hanbang.Entity;
+package com.monsters.hanbang.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.*;
 
 @Getter
@@ -10,7 +13,8 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 public class Tent {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name; // 그늘막 구역 이름
@@ -38,4 +42,8 @@ public class Tent {
     private String info; // 시설(이용)안내
 
     private String contact; // 연락처
+
+    private long currentTents; // 이용 중인 텐트 개수
+
+    private long recommendedTents; // 권장하는 텐트 개수
 }
