@@ -43,7 +43,5 @@ public class Tent {
 
     private String contact; // 연락처
 
-    private long currentTents; // 이용 중인 텐트 개수
-
     private long recommendedTents; // 권장하는 텐트 개수
 }

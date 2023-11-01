@@ -173,7 +173,13 @@ function App() {
 
             if (tents.ok) {
                 const tentData = await tents.json();
-                setTentData(tentData);
+
+                const tentsWithCurrentTents = tentData.map((tent) => ({
+                    ...tent,
+                    currentTents: 0, // 모델값으로 들어갈 예정
+                }));
+
+                setTentData(tentsWithCurrentTents);
             } else {
                 console.log('그늘막 구역 목록 불러오기 실패');
             }
@@ -187,7 +193,7 @@ function App() {
 
         const container = document.getElementById('map');
         const mapOptions = {
-            center: new kakao.maps.LatLng(37.52221694757347, 127.0129412878935),
+            center: new kakao.maps.LatLng(37.5537017889497, 126.89792568378567),
             level: 3
         };
         const kakaoMap = new kakao.maps.Map(container, mapOptions);
@@ -213,7 +219,7 @@ function App() {
     useEffect(() => {
         const initialExpandedState = {};
         tentData.forEach((tent) => {
-            initialExpandedState[tent.id] = false;
+            initialExpandedState[tent.id] = (tent.id === 1);
         });
         setExpandedTents(initialExpandedState);
     }, [tentData]);
@@ -258,7 +264,7 @@ function App() {
                                  // 클릭한 텐트만 true로 설정
                                  newExpandedState[tent.id] = true;
 
-                                 map.panTo(polygonPaths[tent.id][0]);
+                                 map.panTo(polygonPaths[tent.id - 1][0]);
 
                                  return newExpandedState;
                              });
