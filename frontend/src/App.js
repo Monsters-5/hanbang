@@ -173,7 +173,13 @@ function App() {
 
             if (tents.ok) {
                 const tentData = await tents.json();
-                setTentData(tentData);
+
+                const tentsWithCurrentTents = tentData.map((tent) => ({
+                    ...tent,
+                    currentTents: 0, // 모델값으로 들어갈 예정
+                }));
+
+                setTentData(tentsWithCurrentTents);
             } else {
                 console.log('그늘막 구역 목록 불러오기 실패');
             }
