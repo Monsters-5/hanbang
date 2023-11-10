@@ -17,6 +17,15 @@ public class TentLogDto {
 
     private String timestamp; // 현재 시간
 
+    public TentLog toEntity() {
+        return TentLog.builder()
+                .id(id)
+                .name(name)
+                .value(value)
+                .timestamp(timestamp)
+                .build();
+    }
+
     public static TentLogDto from(TentLog entity) {
         return TentLogDto.builder()
                 .id(entity.getId())
