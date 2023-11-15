@@ -7,6 +7,7 @@ const {kakao} = window;
 
 function App() {
     const [tentData, setTentData] = useState([]);
+    const [operatingTentData, setOperatingTentData] = useState([]);
     const [expandedTents, setExpandedTents] = useState({});
     const [map, setMap] = useState(null);
 
@@ -162,18 +163,41 @@ function App() {
             new kakao.maps.LatLng(37.52189932131019, 127.01314768189819),
             new kakao.maps.LatLng(37.522011932417946, 127.01327496484893),
             new kakao.maps.LatLng(37.52210202472301, 127.01334568266839)
-        ],
+        ]
     ];
 
     const getTents = async () => {
         try {
-            const tents = await fetch('http://localhost:8080/api/tents', {
+            const tents = await fetch('http://43.202.135.34:8080/api/tents', {
                 method: 'GET'
             });
 
             if (tents.ok) {
                 const tentData = await tents.json();
-                setTentData(tentData);
+
+                const tentsWithCurrentTents = tentData.map((tent) => ({
+                    ...tent,
+                    currentTents: 0
+                }));
+
+                setTentData(tentsWithCurrentTents);
+
+                const operating = tentsWithCurrentTents
+                    .filter((t) => t.status === '운영')
+                    .map((t) => ({id: t.id}))
+                    .reduce((acc, tent) => {
+                        acc.id.push(tent.id);
+                        return acc;
+                    }, {id: []});
+
+                setOperatingTentData(operating);
+
+                const initialExpandedState = {};
+                tentData.forEach((tent) => {
+                    initialExpandedState[tent.id] = (tent.id === 1);
+                });
+
+                setExpandedTents(initialExpandedState);
             } else {
                 console.log('그늘막 구역 목록 불러오기 실패');
             }
@@ -182,12 +206,45 @@ function App() {
         }
     }
 
+    const getTentLogs = async () => {
+        try {
+            let logs = await fetch('http://43.202.135.34:8080/api/tents/logs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(operatingTentData)
+            });
+
+            if (logs.ok) {
+                let logData = await logs.json();
+
+                const updatedTentData = tentData.map(tent => {
+                    const matchingOperatingTent = logData.find(tentLog => tentLog.id === tent.id);
+
+                    // 만약 일치하는 객체가 있으면, currentTents에 tent_cnt 값을 할당
+                    if (matchingOperatingTent) {
+                        tent.currentTents = matchingOperatingTent.tent_cnt;
+                    }
+
+                    return tent;
+                });
+
+                setTentData(updatedTentData);
+            } else {
+                console.log('그늘막 구역 로그 불러오기 실패');
+            }
+        } catch (error) {
+            console.error('그늘막 구역 로그 불러오기 에러 - ', error);
+        }
+    }
+
     useEffect(() => {
         getTents();
 
         const container = document.getElementById('map');
         const mapOptions = {
-            center: new kakao.maps.LatLng(37.52221694757347, 127.0129412878935),
+            center: new kakao.maps.LatLng(37.5537017889497, 126.89792568378567),
             level: 3
         };
         const kakaoMap = new kakao.maps.Map(container, mapOptions);
@@ -211,13 +268,8 @@ function App() {
     }, []);
 
     useEffect(() => {
-        const initialExpandedState = {};
-        tentData.forEach((tent) => {
-            initialExpandedState[tent.id] = false;
-        });
-        setExpandedTents(initialExpandedState);
-    }, [tentData]);
-
+        getTentLogs();
+    }, [tentData]); // tentData가 바뀔 때마다 효과를 재실행
 
     return (
         <div style={{display: 'flex', height: '100vh'}}>
@@ -258,7 +310,7 @@ function App() {
                                  // 클릭한 텐트만 true로 설정
                                  newExpandedState[tent.id] = true;
 
-                                 map.panTo(polygonPaths[tent.id][0]);
+                                 map.panTo(polygonPaths[tent.id - 1][0]);
 
                                  return newExpandedState;
                              });

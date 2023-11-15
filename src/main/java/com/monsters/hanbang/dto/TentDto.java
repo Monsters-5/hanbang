@@ -37,8 +37,6 @@ public class TentDto {
 
     private String contact; // 연락처
 
-    private long currentTents; // 이용 중인 텐트 개수
-
     private long recommendedTents; // 권장하는 텐트 개수
 
     public static TentDto from(Tent entity) {
@@ -57,7 +55,6 @@ public class TentDto {
                 .fee(entity.getFee())
                 .info(entity.getInfo())
                 .contact(entity.getContact())
-                .currentTents(entity.getCurrentTents())
                 .recommendedTents(entity.getRecommendedTents())
                 .build();
     }
