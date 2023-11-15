@@ -1,7 +1,7 @@
 name: deploy-app
 on:
   push:
-    branches: [ feat#5_model_연결 ]
+    branches: [ main ]
 
 jobs:
   deploy:
