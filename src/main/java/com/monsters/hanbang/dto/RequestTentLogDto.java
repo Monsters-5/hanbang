@@ -1,6 +1,5 @@
 package com.monsters.hanbang.dto;
 
-import com.monsters.hanbang.entity.TentLog;
 import lombok.*;
 
 import java.util.List;
