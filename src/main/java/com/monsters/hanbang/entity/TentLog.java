@@ -17,9 +17,7 @@ public class TentLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name; // 그늘막 구역 이름
-
-    private Long value; // model output
+    private Long tent_cnt; // model output
 
     private String timestamp; // 현재 시간
 }

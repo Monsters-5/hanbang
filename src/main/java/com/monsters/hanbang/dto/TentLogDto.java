@@ -11,17 +11,14 @@ import lombok.*;
 public class TentLogDto {
     private Long id;
 
-    private String name; // 그늘막 구역 이름
-
-    private Long value; // model output
+    private Long tent_cnt; // model output
 
     private String timestamp; // 현재 시간
 
     public TentLog toEntity() {
         return TentLog.builder()
                 .id(id)
-                .name(name)
-                .value(value)
+                .tent_cnt(tent_cnt)
                 .timestamp(timestamp)
                 .build();
     }
@@ -29,8 +26,7 @@ public class TentLogDto {
     public static TentLogDto from(TentLog entity) {
         return TentLogDto.builder()
                 .id(entity.getId())
-                .name(entity.getName())
-                .value(entity.getValue())
+                .tent_cnt(entity.getTent_cnt())
                 .timestamp(entity.getTimestamp())
                 .build();
     }
