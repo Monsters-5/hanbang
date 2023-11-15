@@ -1,13 +1,13 @@
 package com.monsters.hanbang.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.monsters.hanbang.dto.RequestTentLogDto;
 import com.monsters.hanbang.dto.TentDto;
 import com.monsters.hanbang.dto.TentLogDto;
 import com.monsters.hanbang.service.TentLogService;
 import com.monsters.hanbang.service.TentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,11 +26,23 @@ public class TentController {
         return ResponseEntity.ok(tentService.getAllTent());
     }
 
-    @PostMapping("/tentLogs")
-    public ResponseEntity<List<TentLogDto>> getTentLogs(@RequestBody) throws JsonProcessingException { // request body 넣기
+    @PostMapping("/logs")
+    public ResponseEntity<List<TentLogDto>> getTentLogs(@RequestBody RequestTentLogDto request) throws JsonProcessingException {
         // 1. model 요청 보내기
-        String apiUrl = "";
-        ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
+        // 헤더 설정
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        // HttpEntity 생성
+        HttpEntity<RequestTentLogDto> requestEntity = new HttpEntity<>(request, headers);
+
+        // 서버로 POST 요청 보내기
+        ResponseEntity<String> response = restTemplate.postForEntity(
+                "http://ec2-13-124-119-183.ap-northeast-2.compute.amazonaws.com:5000/predict",
+                requestEntity,
+                String.class
+        );
+
         if (response.getStatusCode() == HttpStatus.OK) { // status가 ok
             // 2. data 저장하기
             tentLogService.save(response.getBody());
