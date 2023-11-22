@@ -47,7 +47,7 @@
 - Server<br>
   <img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=for-the-badge&logo=Amazon EC2&logoColor=white"> <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white"> <img src="https://img.shields.io/badge/GitHub Actions-2088FF?style=for-the-badge&logo=GitHub Actions&logoColor=white"> <br>  
 - Model<br>
-  <img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white"> <img src="https://img.shields.io/badge/YOLOv8-00FFFF?style=for-the-badge&logo=YOLO&logoColor=white"> <img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=Flask&logoColor=white"> <br>
+  <img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white"> <img src="https://img.shields.io/badge/YOLOv8-00FFFF?style=for-the-badge&logo=&logoColor=white"> <img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=Flask&logoColor=white"> <br>
 - Team Tools<br>
   <img src="https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white"/> <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"/> <img src="https://img.shields.io/badge/gitkraken-%179287.svg?style=for-the-badge&logo=gitkraken&logoColor=white"/> <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white"/> <img src="https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white"/> <br>
 <br>
@@ -57,7 +57,7 @@
 |                                                        김다은                                                                     |                                      김정호                                                                        |
 |:-------------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------:|
 | <img width="200" src="https://user-images.githubusercontent.com/77656241/215424915-043d3e72-5605-41c5-84af-4925d72732d2.png" /> | <img width="200" src="https://github.com/chy0503/chy0503/assets/90389517/86cae49c-c6c0-4d5d-a7e0-5d061580e2cb" /> |
-|                                   Team Leader<br/>Model Server                                                                  |                                    Model Server                                                                   |
+|                                   **[Team Leader]**<br/>Model Server                                                                  |                                    Model Server                                                                   |
 |                                     [@DaeunKim9](https://github.com/DaeunKim9)                                                  |                   [@KimJeongHo](https://github.com/Jeongho-K)                                                     |
 
 |                                                               박성부                                                              |                                                        이낙규                                                      |                                     조희연                                       |
