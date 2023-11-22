@@ -3,6 +3,7 @@
 - 한강의 그늘막 설치 구역의 정보를 확인하고 AI(YOLOv8)를 활용해 구역별 실시간 혼잡도를 확인할 수 있는 서비스 
 <br><br>
 
+### Service
 <img src="https://github.com/Monsters-5/hanbang/assets/90389517/1dc0fd1c-4a74-4bc7-865f-816f87a15843"><br>
 - 한강 그늘막 설치허용 구역 일괄 조회 및 AI를 활용한 혼잡도 확인
     - 지도상으로 구역 표시 및 혼잡도에 따라 색으로 구분
